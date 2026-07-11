@@ -12,6 +12,7 @@ const truckRoutes = require("./routes/truckRoutes");
 const categoryRoutes = require("./routes/categoryRoutes");
 const feedbackRoutes = require("./routes/feedbackRoutes");
 const adminRoutes = require("./routes/adminRoutes");
+const accidentReportRoutes = require("./routes/accidentReportRoutes");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -76,7 +77,9 @@ const routeMappings = [
   ["/api/feedback", feedbackRoutes],
   ["/feedback", feedbackRoutes],
   ["/api/admin", adminRoutes],
-  ["/admin", adminRoutes]
+  ["/admin", adminRoutes],
+  ["/api/accident-reports", accidentReportRoutes],
+  ["/accident-reports", accidentReportRoutes]
 ];
 
 routeMappings.forEach(([prefix, router]) => app.use(prefix, router));
