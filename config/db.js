@@ -1,10 +1,11 @@
 const mysql = require("mysql2/promise");
 require("dotenv").config();
 
-// Aiven (and most managed MySQL hosts) require SSL. Locally, DB_SSL is usually
-// unset, so the pool just connects normally without it.
+// Aiven (and most managed MySQL hosts) require SSL, but sign their certificates
+// with their own CA rather than a publicly trusted one. rejectUnauthorized: false
+// still encrypts the connection, it just skips verifying the certificate chain.
 const sslConfig = process.env.DB_SSL === "true"
-  ? { rejectUnauthorized: true }
+  ? { rejectUnauthorized: false }
   : undefined;
 
 // A connection pool lets the app reuse database connections efficiently.
